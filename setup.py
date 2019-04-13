@@ -8,6 +8,7 @@ setuptools.setup(
     zip_safe=False,
     install_requires=[
         'Flask',
+        'pickle'
     ],
     extras_require={
         'dev': [
