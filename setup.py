@@ -7,7 +7,7 @@ setuptools.setup(
     include_package_data=False,
     zip_safe=False,
     install_requires=[
-        'Flask'
+        'Flask',
         'requests',
         'sklearn'
     ],
