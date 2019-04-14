@@ -8,7 +8,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn import metrics
 
 
-def pickle_vectorizer(v, path='model_pickles/vectorizer.pkl'):
+def pickle_vectorizer(v, path='app/model_pickles/vectorizer.pkl'):
         """
         Saves the trained vectorizer for future use.
         """
@@ -17,7 +17,7 @@ def pickle_vectorizer(v, path='model_pickles/vectorizer.pkl'):
             print("Pickled vectorizer at {}".format(path))
 
 
-def pickle_clf(clf, path='model_pickles/clf.pkl'):
+def pickle_clf(clf, path='app/model_pickles/clf.pkl'):
         """
         Saves the trained classifier for future use.
         """
@@ -32,9 +32,11 @@ def build_model():
     latest training data set, and retrain the model
     """
     # get training set
-    training_set = requests.get(url_to_scala_api/training_data)
-    training_data = training_set.json()
-    if len(training_data) > 0:
+    # training_set = requests.get("http://localhost:8080/training")
+    # training_data = training_set.json()
+    with open("app/test_data.json", "r") as fl:
+        training_data = json.load(fl)
+    if len(training_data) >= 20:
         X = [x.get("content") for x in training_data]
         Y = [x.get("tag") for x in training_data]
         
@@ -44,12 +46,7 @@ def build_model():
         clf = LogisticRegression(random_state=0).fit(x_train_counts, y_train)
         predictions = clf.predict(count_vect.transform(x_test))
         accuracy = metrics.accuracy_score(y_test, predictions)
+        print(accuracy)
         if accuracy > 0.5:
             pickle_vectorizer(count_vect)
             pickle_clf(clf)
-
-
-
-
-if __name__ == "__main__":
-    build_model()

@@ -7,8 +7,9 @@ setuptools.setup(
     include_package_data=False,
     zip_safe=False,
     install_requires=[
-        'Flask',
-        'pickle'
+        'Flask'
+        'requests',
+        'sklearn'
     ],
     extras_require={
         'dev': [

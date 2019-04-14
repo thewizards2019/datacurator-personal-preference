@@ -38,7 +38,7 @@ scan:
 	$(bandit) -lll -r app/
 
 run:
-	$(PKG_NAME) run
+	python3 -u app/app.py
 
 clean:
 	rm -rf $(VENV)
